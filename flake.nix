@@ -42,6 +42,7 @@
         apps.update = {
           type = "app";
           program = "${update}/bin/dash-update";
+          meta.description = "Regenerate data/*.json from the Dart/Flutter archives";
         };
         apps.default = self.apps.${system}.update;
       });

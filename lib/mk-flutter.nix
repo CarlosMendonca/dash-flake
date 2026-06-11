@@ -60,17 +60,15 @@ if isLinux then
       name = "flutter-fhs-${attr}";
       # Loader + libraries for Flutter tooling and the runtime-downloaded engine.
       # Library set mirrors nixpkgs' flutter wrapper (Linux desktop target).
-      targetPkgs = p:
-        (with p; [
-          bashInteractive coreutils which gitMinimal curl cacert
-          # toolchain for `flutter build linux`
-          pkg-config cmake ninja clang
-          # engine / desktop runtime libraries
-          glib gtk3 atk cairo gdk-pixbuf harfbuzz libepoxy pango
-          zlib libdeflate libGL
-          stdenv.cc.cc.lib
-        ])
-        ++ (with p.xorg; [ libX11 xorgproto ]);
+      targetPkgs = p: with p; [
+        bashInteractive coreutils which gitMinimal curl cacert
+        # toolchain for `flutter build linux`
+        pkg-config cmake ninja clang
+        # engine / desktop runtime libraries
+        glib gtk3 atk cairo gdk-pixbuf harfbuzz libepoxy pango
+        zlib libdeflate libGL libx11 xorgproto
+        stdenv.cc.cc.lib
+      ];
       runScript = pkgs.writeShellScript "flutter-run-${attr}" setupBody;
     };
   in

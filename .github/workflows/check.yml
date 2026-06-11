@@ -1,0 +1,43 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request: {}
+  workflow_dispatch: {}
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v27
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+      # Evaluates every dart_*/flutter_* derivation + apps + overlay.
+      - run: nix flake check --all-systems
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v27
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+      # Build the latest stable Dart and run it; catches upstream archive/format
+      # regressions on x86_64-linux.
+      - run: nix build .#dart --print-build-logs
+      - run: ./result/bin/dart --version
+
+  build-darwin:
+    runs-on: macos-14 # Apple silicon -> aarch64-darwin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v27
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+      - run: nix build .#dart --print-build-logs
+      - run: ./result/bin/dart --version

@@ -1,0 +1,47 @@
+name: update
+
+# Regenerate data/*.json from Google's archives so new Dart/Flutter releases
+# become available as packages within ~a day of upstream publishing them.
+on:
+  schedule:
+    - cron: "0 6 * * *" # daily at 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cachix/install-nix-action@v27
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Regenerate version data
+        run: nix run .#update
+
+      - name: Sanity-check the flake still evaluates
+        run: nix flake check --all-systems
+
+      - name: Open a PR if data changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "data: refresh Dart/Flutter versions"
+          title: "data: refresh Dart/Flutter versions"
+          body: |
+            Automated refresh of `data/dart.json` / `data/flutter.json` from the
+            Google release archives.
+          branch: bot/update-versions
+          delete-branch: true
+          add-paths: |
+            data/dart.json
+            data/flutter.json

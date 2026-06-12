@@ -56,6 +56,22 @@ let
 in
 if isLinux then
   let
+    # The full gtk+-3.0 pkg-config closure, captured exactly as nixpkgs' own
+    # pkg-config setup hook computes it (transitive deps and all). Baking this
+    # into PKG_CONFIG_PATH lets `flutter doctor` and `flutter build linux` find
+    # GTK out of the box — consumers don't need to add gtk3/pkg-config/etc. to
+    # their devenv. The store paths it points at are readable inside the FHS env.
+    pkgConfigPath = pkgs.runCommand "flutter-linux-pkg-config-path"
+      {
+        nativeBuildInputs = [ pkgs.pkg-config ];
+        buildInputs = [ pkgs.gtk3 ];
+      }
+      ''printf '%s' "$PKG_CONFIG_PATH" > $out'';
+
+    runScript = pkgs.writeShellScript "flutter-run-${attr}" (''
+      export PKG_CONFIG_PATH="$(cat ${pkgConfigPath})''${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
+    '' + setupBody);
+
     fhs = pkgs.buildFHSEnv {
       name = "flutter-fhs-${attr}";
       # Loader + libraries for Flutter tooling and the runtime-downloaded engine.
@@ -69,7 +85,7 @@ if isLinux then
         zlib libdeflate libGL libx11 xorgproto
         stdenv.cc.cc.lib
       ];
-      runScript = pkgs.writeShellScript "flutter-run-${attr}" setupBody;
+      inherit runScript;
     };
   in
   pkgs.runCommand "flutter-${version}"

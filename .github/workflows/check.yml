@@ -45,6 +45,11 @@ jobs:
       # writable cache and downloads + execs the engine inside the FHS env --
       # the riskiest, most-edited code in the repo.
       - run: nix build .#flutter --print-build-logs
+      # buildFHSEnv runs Flutter inside bubblewrap, which needs unprivileged
+      # user namespaces. ubuntu-24.04 runners block those via AppArmor by
+      # default (bwrap fails with "setting up uid map: Permission denied"), so
+      # lift the restriction before entering the FHS sandbox.
+      - run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
       - run: nix run .#flutter -- --version
 
   # Temporarily disabled to keep CI cheaper. The Darwin Dart path is just

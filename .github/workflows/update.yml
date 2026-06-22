@@ -38,6 +38,12 @@ jobs:
       - name: Build latest Dart
         run: nix build .#dart --print-build-logs && ./result/bin/dart --version
 
+      # buildFHSEnv runs Flutter inside bubblewrap, which needs unprivileged
+      # user namespaces; ubuntu-24.04 runners block those via AppArmor by
+      # default, so lift the restriction before entering the FHS sandbox.
+      - name: Allow unprivileged user namespaces (bwrap/FHS)
+        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+
       - name: Build + run latest Flutter
         run: nix build .#flutter --print-build-logs && nix run .#flutter -- --version
 

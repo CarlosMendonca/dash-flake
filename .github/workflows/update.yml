@@ -32,6 +32,17 @@ jobs:
       - name: Sanity-check the flake still evaluates
         run: nix flake check --all-systems
 
+      # Build + run the latest stable Dart and Flutter against the freshly
+      # regenerated data, so a broken refresh fails this job before a PR is
+      # opened. Mirrors check.yml's Linux coverage; the bot PR can't trigger
+      # check.yml automatically (GITHUB_TOKEN events don't start workflows),
+      # so we validate here instead.
+      - name: Build latest Dart
+        run: nix build .#dart --print-build-logs && ./result/bin/dart --version
+
+      - name: Build + run latest Flutter
+        run: nix build .#flutter --print-build-logs && nix run .#flutter -- --version
+
       - name: Open a PR if data changed
         uses: peter-evans/create-pull-request@v6
         with:

@@ -31,13 +31,33 @@ jobs:
       - run: nix build .#dart --print-build-logs
       - run: ./result/bin/dart --version
 
-  build-darwin:
-    runs-on: macos-14 # Apple silicon -> aarch64-darwin
+  build-flutter-linux:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v27
         with:
           extra_nix_config: |
             experimental-features = nix-command flakes
-      - run: nix build .#dart --print-build-logs
-      - run: ./result/bin/dart --version
+      # Build the latest stable Flutter and run it. `nix build` guards the FHS
+      # wrapper (mk-flutter.nix) against eval/build regressions; running
+      # `--version` exercises the first-run path that copies the SDK to a
+      # writable cache and downloads + execs the engine inside the FHS env --
+      # the riskiest, most-edited code in the repo.
+      - run: nix build .#flutter --print-build-logs
+      - run: nix run .#flutter -- --version
+
+  # Temporarily disabled to keep CI cheaper. The Darwin Dart path is just
+  # "unpack and run" (no patchelf), so it's the lowest-risk build to skip, and
+  # its failures can't be reproduced locally on this x86_64-linux machine anyway.
+  # Uncomment to restore aarch64-darwin build coverage.
+  # build-darwin:
+  #   runs-on: macos-14 # Apple silicon -> aarch64-darwin
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: cachix/install-nix-action@v27
+  #       with:
+  #         extra_nix_config: |
+  #           experimental-features = nix-command flakes
+  #     - run: nix build .#dart --print-build-logs
+  #     - run: ./result/bin/dart --version

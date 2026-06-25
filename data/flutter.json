@@ -1477,11 +1477,25 @@
     "sha256": "70de998e9f440480192daa396bd4ed17e39f44a2c7f1e5a97d00531402188926"
   },
   {
+    "version": "3.44.4",
+    "channel": "stable",
+    "system": "aarch64-darwin",
+    "url": "https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_arm64_3.44.4-stable.zip",
+    "sha256": "eac833fe956c670d1f27946f25de8bc4fe4fb86146d5ef8d53e79a971a3ba042"
+  },
+  {
     "version": "3.45.0-0.1.pre",
     "channel": "beta",
     "system": "aarch64-darwin",
     "url": "https://storage.googleapis.com/flutter_infra_release/releases/beta/macos/flutter_macos_arm64_3.45.0-0.1.pre-beta.zip",
     "sha256": "4405c40029c8de64ceaa759e9b8e2a8e791bbe55174123f6476628e5a91ce74a"
+  },
+  {
+    "version": "3.46.0-0.1.pre",
+    "channel": "beta",
+    "system": "aarch64-darwin",
+    "url": "https://storage.googleapis.com/flutter_infra_release/releases/beta/macos/flutter_macos_arm64_3.46.0-0.1.pre-beta.zip",
+    "sha256": "6902905ddff77cc68c780cdd2973d88cff1c5c4e6d1406be3e8879a3bca34d01"
   },
   {
     "version": "3.6.0-0.1.pre",
@@ -4256,11 +4270,25 @@
     "sha256": "00343ee5264999e8e90e2d02c6952ac3facbf46cf0c6a2518ac8f7d6afa7658c"
   },
   {
+    "version": "3.44.4",
+    "channel": "stable",
+    "system": "x86_64-linux",
+    "url": "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.44.4-stable.tar.xz",
+    "sha256": "c853cda0312a162854c481fe6a1bc286d84fbb74bfab7037c39750061dc9b466"
+  },
+  {
     "version": "3.45.0-0.1.pre",
     "channel": "beta",
     "system": "x86_64-linux",
     "url": "https://storage.googleapis.com/flutter_infra_release/releases/beta/linux/flutter_linux_3.45.0-0.1.pre-beta.tar.xz",
     "sha256": "1e94556cb23ef787baeb40939db7befe783ab4c340305ba7adfa0f0c07e0da78"
+  },
+  {
+    "version": "3.46.0-0.1.pre",
+    "channel": "beta",
+    "system": "x86_64-linux",
+    "url": "https://storage.googleapis.com/flutter_infra_release/releases/beta/linux/flutter_linux_3.46.0-0.1.pre-beta.tar.xz",
+    "sha256": "ea6f9ff354cf19466255a089d72af993add91e7a0592f2fb96bc28a50af3d094"
   },
   {
     "version": "3.6.0-0.1.pre",

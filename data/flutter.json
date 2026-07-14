@@ -1526,6 +1526,13 @@
     "sha256": "5191b391f00a8e3756c873e27326af01b62c40c152d8cfd4b490b9ed8a3530f0"
   },
   {
+    "version": "3.47.0-0.1.pre",
+    "channel": "beta",
+    "system": "aarch64-darwin",
+    "url": "https://storage.googleapis.com/flutter_infra_release/releases/beta/macos/flutter_macos_arm64_3.47.0-0.1.pre-beta.zip",
+    "sha256": "688988016fa2f316963e12d993b5006541c2cdadfad3b9d9723da6ffaba16cd3"
+  },
+  {
     "version": "3.6.0-0.1.pre",
     "channel": "beta",
     "system": "aarch64-darwin",
@@ -4345,6 +4352,13 @@
     "system": "x86_64-linux",
     "url": "https://storage.googleapis.com/flutter_infra_release/releases/beta/linux/flutter_linux_3.46.0-0.3.pre-beta.tar.xz",
     "sha256": "931c30fde3cc9b4eae2bbae750914c1ec60bfea4d46531e37f25caaa1a47d2da"
+  },
+  {
+    "version": "3.47.0-0.1.pre",
+    "channel": "beta",
+    "system": "x86_64-linux",
+    "url": "https://storage.googleapis.com/flutter_infra_release/releases/beta/linux/flutter_linux_3.47.0-0.1.pre-beta.tar.xz",
+    "sha256": "2cf72c1bc8571f406dfb7a0b3d8128abd4f43d2c335d2ed76249fe492c0d7c34"
   },
   {
     "version": "3.6.0-0.1.pre",

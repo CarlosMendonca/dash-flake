@@ -2793,6 +2793,13 @@
     "sha256": "367984941d8d14c653789f6f787312e715e5c546f6e9f5d30d86615c692907a9"
   },
   {
+    "version": "3.13.2",
+    "channel": "stable",
+    "system": "aarch64-darwin",
+    "url": "https://storage.googleapis.com/dart-archive/channels/stable/release/3.13.2/sdk/dartsdk-macos-arm64-release.zip",
+    "sha256": "1e79f51341937f84cc1563a3fcad4a91706e35dee72bda69f4e955065c0e373a"
+  },
+  {
     "version": "3.14.0-110.0.dev",
     "channel": "dev",
     "system": "aarch64-darwin",
@@ -11282,6 +11289,13 @@
     "system": "x86_64-linux",
     "url": "https://storage.googleapis.com/dart-archive/channels/stable/release/3.13.1/sdk/dartsdk-linux-x64-release.zip",
     "sha256": "9251c4606ebb31480c45f430be69fce2697e3b888a0a828b9e16e7d23403d72a"
+  },
+  {
+    "version": "3.13.2",
+    "channel": "stable",
+    "system": "x86_64-linux",
+    "url": "https://storage.googleapis.com/dart-archive/channels/stable/release/3.13.2/sdk/dartsdk-linux-x64-release.zip",
+    "sha256": "28951c9f6bcca005a73aa24cd5e11478dd6555f53e8e96a33ef4d868b6efa9eb"
   },
   {
     "version": "3.14.0-110.0.dev",

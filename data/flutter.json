@@ -4501,6 +4501,13 @@
     "sha256": "a1d8166c0309267cb7dc99f1424eecf08b86946ad3b50723c6f59945964aea45"
   },
   {
+    "version": "3.47.2",
+    "channel": "stable",
+    "system": "x86_64-linux",
+    "url": "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.47.2-stable.tar.xz",
+    "sha256": "447878859d01ca9bfdb99a85f245af07ed8a15fedcd9d189c4749e8e92d1f185"
+  },
+  {
     "version": "3.48.0-0.1.pre",
     "channel": "beta",
     "system": "x86_64-linux",
